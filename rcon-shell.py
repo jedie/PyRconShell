@@ -18,9 +18,10 @@ from pathlib import Path
 try:
     import ensurepip  # noqa
 except ModuleNotFoundError as err:
+    print(err)
+    print('-'*100)
     print('Error: Pip not available!')
-    print(f'\n(Origin error: {err}\n')
-    print('Hint: "apt-get install python3-venv"')
+    print('Hint: "apt-get install python3-venv"\n')
     raise
 
 
