@@ -1,0 +1,35 @@
+# https://github.com/actions/setup-python
+
+name: Test
+
+on:
+  schedule:
+    - cron: '0 8 * * *'
+  push:
+
+jobs:
+  test:
+    name: 'Python ${{ matrix.python-version }} on ${{ matrix.os }}'
+    runs-on: ${{ matrix.os }}
+    env:
+      PYTHONUNBUFFERED: 1
+    strategy:
+      max-parallel: 2
+      fail-fast: false
+      matrix:
+        python-version: [3.9, 3.8]
+        os: [ubuntu-latest, macOS-latest, windows-latest]
+    steps:
+    - uses: actions/checkout@v2
+    - name: 'Set up Python ${{ matrix.python-version }}'
+      uses: actions/setup-python@v2
+      with:
+        python-version: '${{ matrix.python-version }}'
+
+    - name: 'Bootstrap'
+      run: |
+        python3 rcon-shell.py quit
+
+    - name: 'Run tests with Python v${{ matrix.python-version }}'
+      run: |
+        python3 rcon-shell.py pytest
