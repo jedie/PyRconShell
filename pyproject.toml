@@ -1,7 +1,9 @@
 [tool.poetry]
 name = "rcon-shell"
 version = "0.0.1"
-description = "Minecraft rcon shell in python"
+description = "Minecraft rcon shell in Python"
+readme = "README.md"
+homepage = "https://github.com/jedie/PyRconShell"
 authors = ["Jens Diemer <python@jensdiemer.de>"]
 license = "GNU General Public License v3.0"
 packages = [

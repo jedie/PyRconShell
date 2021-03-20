@@ -74,3 +74,8 @@ $ lsof -i
 
 * https://minecraft.gamepedia.com/Commands#List_and_summary_of_commands
 
+
+## Project links
+
+* Github: https://github.com/jedie/PyRconShell
+* PyPi: https://pypi.org/project/rcon-shell/
