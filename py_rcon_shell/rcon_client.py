@@ -41,6 +41,7 @@ class LazyRconClient:
                 self.rcon_port,
                 passwd=self.rcon_password
             ).__enter__()
+        return self.client.run(*args)
 
     def __exit__(self, exc_type, exc_val, exc_tb):
         if self.client is not None:
