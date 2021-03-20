@@ -4,9 +4,12 @@ from pathlib import Path
 import cmd2
 from cmd2 import CommandSet
 from dev_shell.base_cmd2_app import DevShellBaseApp
-from dev_shell.command_sets.dev_shell_commands import DevShellCommandSet
+from dev_shell.command_sets.dev_shell_commands import DevShellCommandSet as OriginDevShellCommandSet
+from dev_shell.command_sets.dev_shell_commands import run_linters
 from dev_shell.config import DevShellConfig
 from dev_shell.utils.colorful import blue, bright_blue, bright_yellow
+from dev_shell.utils.subprocess_utils import verbose_check_call
+from poetry_publish.publish import poetry_publish
 
 import py_rcon_shell
 from py_rcon_shell.rcon_client import LazyRconClient
@@ -35,6 +38,17 @@ class RconShellCommandSet(CommandSet):
 
 class PyRconShellCmd2App(DevShellBaseApp):
     pass
+
+
+class DevShellCommandSet(OriginDevShellCommandSet):
+    def do_publish(self, statement: cmd2.Statement):
+        # don't publish if test fails:
+        verbose_check_call('pytest', '-x')
+
+        poetry_publish(
+            package_root=PACKAGE_ROOT,
+            version=py_rcon_shell.__version__,
+        )
 
 
 def get_app_kwargs(rcon_client: LazyRconClient):

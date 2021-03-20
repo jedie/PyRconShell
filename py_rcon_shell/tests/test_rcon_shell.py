@@ -1,12 +1,9 @@
 import subprocess
-from pathlib import Path
 from unittest.mock import patch
 
-import dev_shell
 from cmd2 import CommandResult
 from cmd2_ext_test import ExternalTestMixin
 from dev_shell.tests.fixtures import CmdAppBaseTestCase
-from dev_shell.utils.assertion import assert_is_file
 
 from py_rcon_shell.rcon_client import LazyRconClient
 from py_rcon_shell.rcon_shell import PyRconShellCmd2App, get_app_kwargs
